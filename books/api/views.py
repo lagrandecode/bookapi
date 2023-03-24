@@ -26,7 +26,9 @@ def book_list(request):
         data = JSONParser().parse(request)
         serializers = BookSerializer(data=data)
         if serializers.is_valid():
-            serializers
+            serializers.save()
+            return Response(serializers.data)
+        return Response(serializers.errors)
 
 
 
