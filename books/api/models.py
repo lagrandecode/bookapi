@@ -8,3 +8,6 @@ class Book(models.Model):
     quantity = models.PositiveIntegerField()
     publish_date = models.DateField()
 
+    def __str__(self):
+        return self.name
+
