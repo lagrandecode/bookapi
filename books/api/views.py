@@ -30,6 +30,14 @@ def book_list(request):
             return Response(serializers.data)
         return Response(serializers.errors)
 
+@api_view(['GET','PUT','DELETE'])
+def book_view(request,pk):
+    try:
+        book = Book.objects.get(id=pk)
+    except:
+        Book.DoesNotExist
+        return Response(serializers.errors,status = status.)
+
 
 
 
