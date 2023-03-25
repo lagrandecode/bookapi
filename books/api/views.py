@@ -54,13 +54,13 @@ from rest_framework.parsers import JSONParser
 
 class BookList(APIView):
     def get(self,request,format=None):
-        if request.method == 'GET':
             books = Book.objects.all()
             serializers = BookSerializer(books,many=True)
             return Response(serializers.data)
+
     def post(self,request,format=None):
-        if request.method == 'POST':
-            serializers = BookSerializer(books,data=request.data)
+            books = Book.objects.all()
+            serializers = BookSerializer(data=request.data)
             if serializers.is_valid():
                 serializers.save()
                 return Response(serializers.data)
@@ -71,7 +71,7 @@ class BookView(APIView):
         try: 
             return Book.objects.get(pk=pk)
         except Book.DoesNotExist:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            raise Http404
     def get(self,request,pk,format=None):
         books = self.get_object(pk)
         serializers = BookSerializer(books)
